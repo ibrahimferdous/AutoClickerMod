@@ -1,0 +1,56 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'java'
+
+version     = "1.0.0"
+group       = "com.autoclicker.mod"
+archivesBaseName = "AutoClickerMod"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+minecraft {
+    version  = "1.8.9-11.15.1.2318-1.8.9"   // Forge 1.8.9 latest stable
+    runDir   = "run"
+    mappings = "stable_22"                    // MCP stable_22 for 1.8.9
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Forge and MC are provided by the ForgeGradle plugin
+}
+
+processResources {
+    inputs.property "version",   project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':   project.version,
+               'mcversion': project.minecraft.version
+    }
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+            'FMLCorePlugin':            '',
+            'FMLCorePluginContainsFMLMod': 'true'
+        )
+    }
+}

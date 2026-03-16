@@ -1,0 +1,228 @@
+================================================================
+  AutoClicker Mod 1.8.9 — How to build your .jar (ready to use)
+================================================================
+
+WHAT YOU NEED
+-------------
+  - Windows PC (these steps are for Windows)
+  - Internet connection
+  - About 10–15 minutes the first time (mostly waiting on downloads)
+
+
+----------------------------------------------------------------
+STEP 1 — Install Java 8
+----------------------------------------------------------------
+
+  1. Go to:
+     https://adoptium.net/temurin/releases/?version=8
+
+  2. Select:
+       Operating System : Windows
+       Architecture     : x64
+       Package Type     : JDK
+
+  3. Download the .msi installer and run it.
+     Click through the installer with all default options.
+
+  4. Verify it worked — open Command Prompt (Win + R → type "cmd" → Enter)
+     and run:
+
+       java -version
+
+     You should see something like:
+       openjdk version "1.8.0_xxx"
+
+     If you do, Java is ready. If not, restart your PC and try again.
+
+
+----------------------------------------------------------------
+STEP 2 — Download Forge MDK 1.8.9
+----------------------------------------------------------------
+
+  1. Go to:
+     https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html
+
+  2. Find the row that says "1.8.9 - 11.15.1.2318" (latest for 1.8.9)
+     and click the "Mdk" download button.
+
+     NOTE: The page has ads with fake download buttons.
+     Wait 5 seconds after the page loads — the REAL download button
+     appears in the top-right corner of the ad box. Click that one.
+
+  3. Save the zip somewhere easy, like your Desktop.
+     It will be named something like:
+       forge-1.8.9-11.15.1.2318-mdk.zip
+
+
+----------------------------------------------------------------
+STEP 3 — Set up the project folder
+----------------------------------------------------------------
+
+  1. Extract the Forge MDK zip you just downloaded.
+     You will get a folder, rename it to:
+       AutoClickerMod
+
+  2. Open that folder. You will see files like:
+       build.gradle
+       gradlew.bat
+       src/
+       ...
+
+  3. DELETE the entire "src" folder inside it.
+
+  4. Now take the "src" folder from the AutoClickerMod zip I gave you
+     (the one you downloaded from this chat) and copy it into
+     the Forge MDK folder, replacing the one you just deleted.
+
+  5. Also replace the "build.gradle" file with the one from my zip.
+
+  Your folder should now look like this:
+       AutoClickerMod/
+         build.gradle          ← from my zip
+         gradlew.bat           ← from Forge MDK (keep this)
+         gradlew               ← from Forge MDK (keep this)
+         gradle/               ← from Forge MDK (keep this)
+         src/
+           main/
+             java/
+               com/autoclicker/mod/
+                 AutoClickerMod.java
+                 AutoClickerHandler.java
+             resources/
+               mcmod.info
+               pack.mcmeta
+
+
+----------------------------------------------------------------
+STEP 4 — Open a Command Prompt inside the project folder
+----------------------------------------------------------------
+
+  1. In Windows Explorer, navigate into your AutoClickerMod folder.
+
+  2. Click the address bar at the top of the window
+     (where it shows the folder path).
+
+  3. Type "cmd" and press Enter.
+     A black Command Prompt window will open, already inside
+     the correct folder.
+
+
+----------------------------------------------------------------
+STEP 5 — Set up the Forge workspace (do this ONCE)
+----------------------------------------------------------------
+
+  In the Command Prompt, type this and press Enter:
+
+    gradlew setupDecompWorkspace
+
+  This downloads Minecraft, Forge, and all required libraries.
+  It will take 5–15 minutes depending on your internet speed.
+  You will see a lot of text scrolling — that is normal.
+
+  Wait until you see:
+    BUILD SUCCESSFUL
+
+  If you see BUILD FAILED, see the Troubleshooting section below.
+
+
+----------------------------------------------------------------
+STEP 6 — Compile the mod
+----------------------------------------------------------------
+
+  In the same Command Prompt, type this and press Enter:
+
+    gradlew build
+
+  This compiles the Java source code into a .jar file.
+  It takes about 30–60 seconds.
+
+  Wait until you see:
+    BUILD SUCCESSFUL
+
+
+----------------------------------------------------------------
+STEP 7 — Get your .jar file
+----------------------------------------------------------------
+
+  1. Inside your AutoClickerMod folder, open:
+       build/libs/
+
+  2. You will see two files:
+       AutoClickerMod-1.0.0.jar
+       AutoClickerMod-1.0.0-sources.jar
+
+  3. Take the one WITHOUT "-sources" in the name:
+       AutoClickerMod-1.0.0.jar
+
+  That is your ready-to-use mod file.
+
+
+----------------------------------------------------------------
+STEP 8 — Install the mod
+----------------------------------------------------------------
+
+  1. Make sure Minecraft Forge 1.8.9 is installed.
+     If not, download the Forge installer (not MDK) from:
+       https://files.minecraftforge.net/net/minecraftforge/forge/index_1.8.9.html
+     Run it and select "Install client".
+
+  2. Open your .minecraft folder.
+     Easiest way: Win + R → type "%appdata%\.minecraft" → Enter.
+
+  3. Open the "mods" folder inside it.
+     If it does not exist, create it.
+
+  4. Copy AutoClickerMod-1.0.0.jar into that mods folder.
+
+  5. Launch Minecraft, select the Forge 1.8.9 profile, and play.
+
+  The mod is active immediately — no config needed.
+
+
+================================================================
+  DONE. The mod is now installed and running.
+================================================================
+
+  Reminder of what it does:
+    - Only activates when you are clicking at 10+ CPS
+    - Each click has a random 20%–80% chance to fire one extra click
+    - Automatically off when any inventory or screen is open
+    - Works anywhere in-game (no crosshair restriction)
+
+
+----------------------------------------------------------------
+TROUBLESHOOTING
+----------------------------------------------------------------
+
+  "gradlew is not recognized"
+    → Make sure you opened cmd INSIDE the AutoClickerMod folder
+      (step 4). Do not run it from your Desktop or Documents.
+
+  "BUILD FAILED" on setupDecompWorkspace
+    → This is almost always a network issue.
+      Try again — it resumes where it left off.
+      If it keeps failing, make sure your firewall / antivirus
+      is not blocking Java.
+
+  "BUILD FAILED" on build
+    → Make sure you copied the src/ folder correctly (step 3).
+      The path must be exactly:
+        src/main/java/com/autoclicker/mod/AutoClickerMod.java
+        src/main/java/com/autoclicker/mod/AutoClickerHandler.java
+
+  Mod does not appear in Minecraft
+    → Make sure you are using the Forge 1.8.9 profile,
+      not vanilla or a different Forge version.
+    → Make sure the .jar is in .minecraft/mods/ directly,
+      not inside a subfolder.
+
+  Java version error during build
+    → You may have multiple Java versions installed.
+      Set JAVA_HOME to your Java 8 installation:
+        Win + R → "sysdm.cpl" → Advanced → Environment Variables
+        New system variable:
+          Name  : JAVA_HOME
+          Value : C:\Program Files\Eclipse Adoptium\jdk-8.x.x.x-hotspot
+        (adjust the path to match where Java 8 was installed)
+
+----------------------------------------------------------------
