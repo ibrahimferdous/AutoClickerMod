@@ -1,0 +1,15 @@
+[
+  {
+    "modid": "autoclickermod",
+    "name": "AutoClicker Mod",
+    "description": "Randomly double-clicks (20%-80% chance) when you are already clicking at 10+ CPS. Inactive in GUIs/inventories. Only fires on blocks.",
+    "version": "1.0.0",
+    "mcversion": "1.8.9",
+    "url": "",
+    "authorList": ["You"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
